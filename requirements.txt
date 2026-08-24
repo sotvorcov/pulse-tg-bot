@@ -1,0 +1,6 @@
+python-telegram-bot>=22
+aiolimiter>=1.2          # рейт-лимитер Telegram (не терять сообщения при флуде 429)
+# для голосовых (необязательно):
+openai>=1.0
+google-auth              # Vertex ASR / Nano Banana (если используешь GCP)
+httpx

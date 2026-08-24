@@ -1,0 +1,17 @@
+[Unit]
+Description=TG Claude Bot — пульт Claude Code в Telegram
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/tg-claude-bot
+EnvironmentFile=/root/tg-claude-bot/.env
+Environment=HOME=/root
+Environment=PATH=/root/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/usr/bin/python3 /root/tg-claude-bot/bot.py
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

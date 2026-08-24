@@ -1,0 +1,25 @@
+# Секреты и локальное состояние — НИКОГДА не коммитить
+.env
+bot.db
+bot.db-journal
+*.session
+
+# Пользовательские иконки/эмодзи (свой набор — из .example)
+pulse_icons.json
+
+# Кэш загруженных из чата картинок/голоса
+_img/
+_voice_*.oga
+*.oga
+
+# Логи и бэкапы
+*.log
+*.bak
+*.bak-*
+bot.py.bak-*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

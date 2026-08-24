@@ -1,0 +1,114 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" font-family="'DejaVu Sans','Liberation Sans',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141b24"/>
+      <stop offset="0.5" stop-color="#0c121a"/>
+      <stop offset="1" stop-color="#070a0e"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.28" cy="0.32" r="0.5">
+      <stop offset="0" stop-color="#2b3d52" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#0c121a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6d68a"/>
+      <stop offset="0.5" stop-color="#e8b563"/>
+      <stop offset="1" stop-color="#d3a94f"/>
+    </linearGradient>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <rect width="1280" height="720" fill="url(#glow)"/>
+
+  <!-- ЛЕВАЯ КОЛОНКА -->
+  <!-- значок >_ -->
+  <g transform="translate(80,86)">
+    <rect x="0" y="0" width="66" height="66" rx="18" fill="#0c121a" stroke="#d3a94f" stroke-opacity="0.55" stroke-width="1.5"/>
+    <path d="M8 33 H22 L27 22 L34 47 L41 19 L47 40 L52 33 H60" fill="none" stroke="url(#gold)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#soft)"/>
+  </g>
+  <text x="164" y="118" fill="#f4efe4" font-size="40" font-weight="700" letter-spacing="1">Pulse</text>
+  <text x="164" y="142" fill="#d3a94f" font-size="14.5" letter-spacing="3" font-weight="600">ПУЛЬС РАЗРАБОТКИ · AI</text>
+
+  <!-- заголовок -->
+  <text x="78" y="258" fill="#f6f2e8" font-size="66" font-weight="700" letter-spacing="-1">Вайбкодь</text>
+  <text x="78" y="330" fill="#f6f2e8" font-size="66" font-weight="700" letter-spacing="-1">с телефона.</text>
+  <text x="78" y="398" fill="url(#gold)" font-size="66" font-weight="700" letter-spacing="-1">Откуда угодно.</text>
+
+  <!-- подзаголовок -->
+  <text x="80" y="452" fill="#9aa3ad" font-size="21">Claude Code в Telegram: наговорил задачу голосом —</text>
+  <text x="80" y="482" fill="#9aa3ad" font-size="21">код пишется и тестируется на сервере, результат в чат.</text>
+
+  <!-- буллеты -->
+  <g font-size="20.5" fill="#d7d2c6">
+    <g transform="translate(80,536)"><path d="M0,-6 L7,0 L0,6 L-7,0 Z" fill="url(#gold)"/><text x="20" y="6">Голосом, на ходу — не печатая</text></g>
+    <g transform="translate(80,576)"><path d="M0,-6 L7,0 L0,6 L-7,0 Z" fill="url(#gold)"/><text x="20" y="6">Топик = сессия: проекты как вкладки</text></g>
+    <g transform="translate(80,616)"><path d="M0,-6 L7,0 L0,6 L-7,0 Z" fill="url(#gold)"/><text x="20" y="6">Тут же тестируешь варианты вживую</text></g>
+    <g transform="translate(80,656)"><path d="M0,-6 L7,0 L0,6 L-7,0 Z" fill="url(#gold)"/><text x="20" y="6">Одна история с VS Code · не привязан к месту</text></g>
+  </g>
+
+  <!-- ПРАВАЯ КОЛОНКА: телефон -->
+  <g transform="translate(812,96)">
+    <rect x="0" y="0" width="330" height="560" rx="42" fill="#0a0f15" stroke="#2a333d" stroke-width="2"/>
+    <rect x="12" y="12" width="306" height="536" rx="32" fill="#0e141c"/>
+    <!-- шапка чата -->
+    <rect x="12" y="12" width="306" height="70" rx="32" fill="#121a23"/>
+    <rect x="12" y="52" width="306" height="30" fill="#121a23"/>
+    <g transform="translate(36,34)">
+      <rect x="0" y="0" width="30" height="30" rx="9" fill="#0c121a" stroke="#d3a94f" stroke-opacity="0.5"/>
+      <polyline points="9,9 16,15 9,21" fill="none" stroke="url(#gold)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="18" y="18" width="8" height="3" rx="1.5" fill="url(#gold)"/>
+    </g>
+    <text x="78" y="46" fill="#f0ece1" font-size="17" font-weight="700">Pulse</text>
+    <text x="78" y="66" fill="#7d8791" font-size="13">тема: лендинг</text>
+
+    <!-- голосовое (входящее, справа, золотое) -->
+    <g transform="translate(150,110)">
+      <rect x="0" y="0" width="156" height="46" rx="16" fill="#3a3016" stroke="#d3a94f" stroke-opacity="0.4"/>
+      <g fill="url(#gold)">
+        <rect x="16" y="18" width="4" height="10" rx="2"/><rect x="24" y="13" width="4" height="20" rx="2"/>
+        <rect x="32" y="9" width="4" height="28" rx="2"/><rect x="40" y="15" width="4" height="16" rx="2"/>
+        <rect x="48" y="11" width="4" height="24" rx="2"/><rect x="56" y="18" width="4" height="10" rx="2"/>
+        <rect x="64" y="14" width="4" height="18" rx="2"/>
+      </g>
+      <text x="118" y="29" fill="#e8c987" font-size="13">0:06</text>
+    </g>
+    <text x="150" y="176" fill="#6f7883" font-size="12.5">«сделай кнопку золотой…»</text>
+
+    <!-- ответ (слева, тёмный) -->
+    <g transform="translate(24,200)">
+      <rect x="0" y="0" width="240" height="150" rx="16" fill="#161d26"/>
+      <g stroke="url(#gold)" stroke-width="2.5" fill="none" stroke-linecap="round">
+        <polyline points="18,20 26,26 18,32"/>
+      </g>
+      <text x="38" y="30" fill="#9aa3ad" font-size="13" font-weight="600">Готово · применил</text>
+      <text x="18" y="62" fill="#cfd8e2" font-size="13">Кнопка золотая, отступ</text>
+      <text x="18" y="82" fill="#cfd8e2" font-size="13">24px, ховер плавный.</text>
+      <rect x="18" y="98" width="204" height="34" rx="8" fill="#0c1218"/>
+      <text x="30" y="120" fill="#d3a94f" font-size="12.5" font-family="monospace">.btn{background:gold}</text>
+    </g>
+
+    <!-- превью результата -->
+    <g transform="translate(24,362)">
+      <rect x="0" y="0" width="282" height="120" rx="16" fill="#0c1218" stroke="#1e2731"/>
+      <text x="16" y="26" fill="#6f7883" font-size="12" letter-spacing="1">ПРЕВЬЮ</text>
+      <rect x="16" y="40" width="250" height="12" rx="6" fill="#222c37"/>
+      <rect x="16" y="60" width="180" height="12" rx="6" fill="#222c37"/>
+      <rect x="16" y="86" width="120" height="26" rx="8" fill="url(#gold)"/>
+      <text x="42" y="103" fill="#0b0f14" font-size="12" font-weight="700">Попробовать</text>
+    </g>
+
+    <!-- поле ввода -->
+    <g transform="translate(24,500)">
+      <rect x="0" y="0" width="230" height="38" rx="19" fill="#141b23"/>
+      <text x="16" y="24" fill="#5f6873" font-size="13">сообщение…</text>
+      <circle cx="278" cy="19" r="19" fill="url(#gold)"/>
+      <g transform="translate(270,10)" fill="#0b0f14">
+        <rect x="5" y="0" width="6" height="11" rx="3"/><path d="M2,9 a6,6 0 0 0 12,0" fill="none" stroke="#0b0f14" stroke-width="2"/>
+        <rect x="7" y="14" width="2" height="4"/>
+      </g>
+    </g>
+  </g>
+</svg>
