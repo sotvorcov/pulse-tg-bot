@@ -22,6 +22,12 @@ Manage Claude Code sessions on your server right from your phone — like tabs i
 
 ---
 
+> **Не программист?** Установка в один шаг: откройте **Claude Code** на сервере и вставьте готовый запрос — он сам всё скачает, настроит и проведёт вас по шагам (токен, группа, запуск). Смотрите раздел [«Самый простой способ — через Claude Code»](#самый-простой-способ--через-claude-code-для-непрограммистов).
+>
+> **Not a programmer?** One-step install: open **Claude Code** on your server and paste the ready prompt — it downloads, configures and walks you through everything. See ["Easiest way — via Claude Code"](#easiest-way--via-claude-code-for-non-programmers).
+
+---
+
 <a name="русский"></a>
 # Русский
 
