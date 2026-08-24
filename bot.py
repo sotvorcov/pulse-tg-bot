@@ -1062,6 +1062,14 @@ STRINGS = {
         "set_language": "🌐 Язык / Language",
         "lang_pick": "🌐 Выбери язык интерфейса:",
         "lang_set": "✅ Язык интерфейса: Русский",
+        "donate_text": (
+            "🙏 <b>Поддержать автора</b>\n\n"
+            "Pulse — бесплатный и открытый. Если он полезен, можно поблагодарить "
+            "(по желанию, адреса тап-копи):\n\n"
+            "• USDT (TRC-20):\n<code>TCq4uGpFcKCJU4fFAZbYzDfLCwG1yAPhN7</code>\n"
+            "• TON:\n<code>UQD3FL-hS5xziU9AW0qL4WnJ13MGCGxZvyANiO4PZE-RcsXR</code>\n"
+            "• Telegram: @naworkal\n\n"
+            "Спасибо, что пользуешься Pulse! 💛"),
     },
     "en": {
         "btn_new": "➕ New session",
@@ -1127,6 +1135,14 @@ STRINGS = {
         "set_language": "🌐 Язык / Language",
         "lang_pick": "🌐 Choose interface language:",
         "lang_set": "✅ Interface language: English",
+        "donate_text": (
+            "🙏 <b>Support the author</b>\n\n"
+            "Pulse is free and open-source. If it's useful, you can say thanks "
+            "(optional, addresses are tap-to-copy):\n\n"
+            "• USDT (TRC-20):\n<code>TCq4uGpFcKCJU4fFAZbYzDfLCwG1yAPhN7</code>\n"
+            "• TON:\n<code>UQD3FL-hS5xziU9AW0qL4WnJ13MGCGxZvyANiO4PZE-RcsXR</code>\n"
+            "• Telegram: @naworkal\n\n"
+            "Thanks for using Pulse! 💛"),
     },
 }
 
@@ -1148,6 +1164,12 @@ async def cmd_lang(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_owner(update):
         return
     await update.effective_message.reply_text(L("lang_pick"), reply_markup=lang_kb())
+
+
+async def cmd_donate(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_owner(update):
+        return
+    await update.effective_message.reply_text(L("donate_text"), parse_mode="HTML")
 
 
 def main_kb():
@@ -2533,6 +2555,7 @@ BOT_COMMANDS = [
     ("settings",  "⚙️ Все настройки бота"),
     ("voice",     "🎙 Распознавание голосовых"),
     ("lang",      "🌐 Язык интерфейса / Language"),
+    ("donate",    "🙏 Поддержать автора / Support"),
     ("thinking",  "💭 Стиль индикатора «думает»"),
     ("thinkicon", "✨ Иконка индикатора"),
     ("verbose",   "📃 Подробность ответов (код/прогресс/только ответ)"),
@@ -2641,6 +2664,7 @@ def main():
     app.add_handler(CommandHandler("compact", cmd_compact))
     app.add_handler(CommandHandler("voice", cmd_voice))
     app.add_handler(CommandHandler("lang", cmd_lang))
+    app.add_handler(CommandHandler("donate", cmd_donate))
     app.add_handler(CommandHandler("thinking", cmd_thinking))
     app.add_handler(CommandHandler("thinkicon", cmd_thinkicon))
     app.add_handler(CommandHandler("settings", cmd_settings))

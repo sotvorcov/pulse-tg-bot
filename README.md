@@ -478,6 +478,17 @@ compact context automatically as it approaches the threshold.
 <img src="assets/mascot/pulse_mascot_04_fox.png" width="110">
 </div>
 
+## Поддержать автора / Support the author
+
+Проект бесплатный и открытый. Если он вам полезен — можно поблагодарить автора (по желанию).
+This project is free and open-source. If you find it useful, you can support the author (optional).
+
+- **USDT (TRC-20):** `TCq4uGpFcKCJU4fFAZbYzDfLCwG1yAPhN7`
+- **TON:** `UQD3FL-hS5xziU9AW0qL4WnJ13MGCGxZvyANiO4PZE-RcsXR`
+- **Telegram / Tribute:** [@naworkal](https://t.me/naworkal)
+
+Спасибо! · Thank you!
+
 ## Автор / Author · Лицензия / License
 
 Создатель / Created by **Gedeon Sotvortsov** (Гедэон Сотворцов) — Telegram [@naworkal](https://t.me/naworkal).

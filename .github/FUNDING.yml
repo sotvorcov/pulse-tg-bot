@@ -1,0 +1,5 @@
+# Кнопка «Sponsor» у репозитория. GitHub Sponsors не используется (не требует
+# зарубежного банка/Stripe) — ведём на кастомные ссылки автора.
+# Custom "Sponsor" button — links to the author's page (no GitHub Sponsors/Stripe needed).
+custom:
+  - "https://t.me/naworkal"
