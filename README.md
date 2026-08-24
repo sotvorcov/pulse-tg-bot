@@ -203,6 +203,7 @@ bash run.sh
 | `/new` | Новая сессия (новая Тема) |
 | `/model` | Выбор модели (Opus / Sonnet / Haiku / Fable / Авто) |
 | `/voice` | Провайдер распознавания голоса |
+| `/lang` | Язык интерфейса (RU / EN) |
 | `/cwd <путь>` | Рабочая папка сессии |
 | `/ultra` | Режим `ultracode` |
 | `/cost` | Сколько потрачено токенов |
@@ -424,6 +425,7 @@ The first person to activate the secret becomes the **owner**. Everyone else is 
 | `/new` | New session (new Topic) |
 | `/model` | Pick model (Opus / Sonnet / Haiku / Fable / Auto) |
 | `/voice` | Voice recognition provider |
+| `/lang` | Interface language (RU / EN) |
 | `/cwd <path>` | Session working directory |
 | `/ultra` | `ultracode` mode |
 | `/cost` | Tokens spent |

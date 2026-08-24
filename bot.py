@@ -988,16 +988,178 @@ async def run_claude(bot, topic, prompt_text):
 
 
 # ── клавиатуры ──────────────────────────────────────────────────────────────────
+# ── i18n: язык интерфейса (RU по умолчанию, переключатель /lang) ──────────────
+LANGS = {"ru": "Русский", "en": "English"}
+
+
+def curlang():
+    v = cfg_get("lang", "ru")
+    return v if v in LANGS else "ru"
+
+
+STRINGS = {
+    "ru": {
+        "btn_new": "➕ Новая сессия",
+        "btn_sessions": "📂 История сессий",
+        "btn_model": "⚙️ Модель",
+        "btn_cost": "💰 Токены",
+        "start_locked": "🔒 Бот не активирован. Владелец активирует так:\n/start <секрет>",
+        "start_owner_ok": "✅ Ты владелец бота.",
+        "start_private": (
+            "✅ Активирован — ты владелец.\n\n"
+            "Я работаю в <b>супергруппе с Темами</b>, а не в личке "
+            "(в личке Telegram не даёт создавать вкладки-сессии).\n"
+            "Открой свою группу и жми там «➕ Новая сессия» / «📂 История», "
+            "либо команды /new, /sessions."),
+        "start_group": (
+            "🎛 <b>Пульт Claude Code</b>\n\n"
+            "Каждый топик группы = отдельная сессия на сервере.\n"
+            "• «➕ Новая сессия» — создаю топик и запускаю свежую сессию\n"
+            "• «📂 История сессий» — открыть прошлую сессию (те самые ветки)\n"
+            "• пиши текст или <b>голосом</b> прямо в топик — это уйдёт в его сессию\n\n"
+            "Команды: /new /sessions /model /cwd /cost /ultra /stop /help"),
+        "help_text": (
+            "Команды:\n"
+            "/new [имя] — новый топик+сессия\n"
+            "/sessions — список прошлых сессий (с пагинацией)\n"
+            "/import [N] — сразу создать вкладки для N последних сессий\n"
+            "/id — id сессии + команда продолжить на ПК\n"
+            "/mirror — зеркалить работу из VS Code в этот топик\n"
+            "/automirror — авто-зеркало ВСЕХ сессий (создаёт вкладки сам)\n"
+            "/dedup — удалить дубли-вкладки\n"
+            "/voice — провайдер распознавания голоса\n"
+            "/lang — язык интерфейса (RU/EN)\n"
+            "/settings — все настройки (тихий режим, подробность)\n"
+            "/thinking — стиль индикатора «думает…»\n"
+            "/verbose — подробность: всё / прогресс без кода / только ответ\n"
+            "/queuemode — как обрабатывать докинутые задачи\n"
+            "/restart — перезапустить бота\n"
+            "/rename <имя> — переименовать этот топик\n"
+            "/model — выбрать модель для этого топика\n"
+            "/cwd <путь> — рабочая папка сессии (по умолч. /root)\n"
+            "/ultra — вкл/выкл режим ultracode\n"
+            "/cost — потрачено токенов в этом топике\n"
+            "/usage — суммарный расход + про лимиты\n"
+            "/footer — подпись со статистикой под ответом вкл/выкл\n"
+            "/stop — прервать текущий запуск\n"
+            "/whoami — твой id и владелец бота"),
+        "settings_title": (
+            "⚙️ <b>Настройки</b>\nЖми, чтобы переключать. По умолчанию бот работает "
+            "тихо — как Claude, без служебных уведомлений."),
+        "set_verbosity": "👁 Подробность",
+        "set_indicator": "💭 Индикатор",
+        "set_queue": "🔀 Очередь",
+        "queue_each": "по одной",
+        "queue_batch": "общим",
+        "set_smart_titles": "AI-названия вкладок",
+        "set_auto_rename": "Подстраивать имя по ходу",
+        "set_mirror_activity": "Индикатор «работает» в зеркале",
+        "set_custom_emoji": "Наши иконки в ответах",
+        "set_auto_compact": "Авто-сжатие контекста (по умолч. выкл)",
+        "set_default_ultra": "Новые сессии — сразу ultracode",
+        "set_notify_queue": "Уведомлять об очереди",
+        "set_notify_voice": "Показывать расшифровку голоса",
+        "set_language": "🌐 Язык / Language",
+        "lang_pick": "🌐 Выбери язык интерфейса:",
+        "lang_set": "✅ Язык интерфейса: Русский",
+    },
+    "en": {
+        "btn_new": "➕ New session",
+        "btn_sessions": "📂 Session history",
+        "btn_model": "⚙️ Model",
+        "btn_cost": "💰 Tokens",
+        "start_locked": "🔒 Bot is not activated. The owner activates it like this:\n/start <secret>",
+        "start_owner_ok": "✅ You are the bot owner.",
+        "start_private": (
+            "✅ Activated — you are the owner.\n\n"
+            "I work in a <b>supergroup with Topics</b>, not in a private chat "
+            "(Telegram doesn't allow creating session tabs in DMs).\n"
+            "Open your group and tap «➕ New session» / «📂 History» there, "
+            "or use /new, /sessions."),
+        "start_group": (
+            "🎛 <b>Claude Code remote</b>\n\n"
+            "Each group topic = a separate session on the server.\n"
+            "• «➕ New session» — I create a topic and start a fresh session\n"
+            "• «📂 Session history» — open a past session (the same threads)\n"
+            "• send text or a <b>voice message</b> right into a topic — it goes to that session\n\n"
+            "Commands: /new /sessions /model /cwd /cost /ultra /stop /help"),
+        "help_text": (
+            "Commands:\n"
+            "/new [name] — new topic + session\n"
+            "/sessions — list past sessions (paginated)\n"
+            "/import [N] — create tabs for the N latest sessions at once\n"
+            "/id — session id + command to continue on your PC\n"
+            "/mirror — mirror work from VS Code into this topic\n"
+            "/automirror — auto-mirror ALL sessions (creates tabs itself)\n"
+            "/dedup — remove duplicate tabs\n"
+            "/voice — speech recognition provider\n"
+            "/lang — interface language (RU/EN)\n"
+            "/settings — all settings (quiet mode, verbosity)\n"
+            "/thinking — style of the “thinking…” indicator\n"
+            "/verbose — verbosity: all / progress without code / reply only\n"
+            "/queuemode — how to handle queued tasks\n"
+            "/restart — restart the bot\n"
+            "/rename <name> — rename this topic\n"
+            "/model — pick the model for this topic\n"
+            "/cwd <path> — session working dir (default /root)\n"
+            "/ultra — toggle ultracode mode\n"
+            "/cost — tokens spent in this topic\n"
+            "/usage — total spend + limits info\n"
+            "/footer — stats footer under replies on/off\n"
+            "/stop — interrupt the current run\n"
+            "/whoami — your id and the bot owner"),
+        "settings_title": (
+            "⚙️ <b>Settings</b>\nTap to toggle. By default the bot runs "
+            "quietly — like Claude, without service notifications."),
+        "set_verbosity": "👁 Verbosity",
+        "set_indicator": "💭 Indicator",
+        "set_queue": "🔀 Queue",
+        "queue_each": "one by one",
+        "queue_batch": "batched",
+        "set_smart_titles": "AI tab names",
+        "set_auto_rename": "Adjust name as it goes",
+        "set_mirror_activity": "“Working” indicator in mirror",
+        "set_custom_emoji": "Our icons in replies",
+        "set_auto_compact": "Auto context compaction (off by default)",
+        "set_default_ultra": "New sessions start in ultracode",
+        "set_notify_queue": "Notify about the queue",
+        "set_notify_voice": "Show voice transcription",
+        "set_language": "🌐 Язык / Language",
+        "lang_pick": "🌐 Choose interface language:",
+        "lang_set": "✅ Interface language: English",
+    },
+}
+
+
+def L(key, **kw):
+    d = STRINGS.get(curlang(), STRINGS["ru"])
+    s = d.get(key) or STRINGS["ru"].get(key, key)
+    return s.format(**kw) if kw else s
+
+
+def lang_kb():
+    return InlineKeyboardMarkup(
+        [[InlineKeyboardButton(("✅ " if k == curlang() else "") + name,
+                               callback_data=f"setlang:{k}")]
+         for k, name in LANGS.items()])
+
+
+async def cmd_lang(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_owner(update):
+        return
+    await update.effective_message.reply_text(L("lang_pick"), reply_markup=lang_kb())
+
+
 def main_kb():
     return InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("➕ Новая сессия", callback_data="new"),
-                InlineKeyboardButton("📂 История сессий", callback_data="sessions"),
+                InlineKeyboardButton(L("btn_new"), callback_data="new"),
+                InlineKeyboardButton(L("btn_sessions"), callback_data="sessions"),
             ],
             [
-                InlineKeyboardButton("⚙️ Модель", callback_data="model"),
-                InlineKeyboardButton("💰 Токены", callback_data="cost"),
+                InlineKeyboardButton(L("btn_model"), callback_data="model"),
+                InlineKeyboardButton(L("btn_cost"), callback_data="cost"),
             ],
         ]
     )
@@ -1017,65 +1179,24 @@ async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if owner is None:
         provided = " ".join(context.args).strip() if context.args else ""
         if OWNER_SETUP_SECRET and provided != OWNER_SETUP_SECRET:
-            await update.effective_message.reply_text(
-                "🔒 Бот не активирован. Владелец активирует так:\n/start <секрет>"
-            )
+            await update.effective_message.reply_text(L("start_locked"))
             return
         cfg_set("owner_id", uid)
         owner = uid
-        await update.effective_message.reply_text("✅ Ты владелец бота.")
+        await update.effective_message.reply_text(L("start_owner_ok"))
     if str(uid) != str(owner):
         return  # тихо игнорим чужих
     if update.effective_chat.type == "private":
-        await update.effective_message.reply_text(
-            "✅ Активирован — ты владелец.\n\n"
-            "Я работаю в <b>супергруппе с Темами</b>, а не в личке "
-            "(в личке Telegram не даёт создавать вкладки-сессии).\n"
-            "Открой свою группу и жми там «➕ Новая сессия» / «📂 История», "
-            "либо команды /new, /sessions.",
-            parse_mode="HTML",
-        )
+        await update.effective_message.reply_text(L("start_private"), parse_mode="HTML")
         return
     await update.effective_message.reply_text(
-        "🎛 <b>Пульт Claude Code</b>\n\n"
-        "Каждый топик группы = отдельная сессия на сервере.\n"
-        "• «➕ Новая сессия» — создаю топик и запускаю свежую сессию\n"
-        "• «📂 История сессий» — открыть прошлую сессию (те самые ветки)\n"
-        "• пиши текст или <b>голосом</b> прямо в топик — это уйдёт в его сессию\n\n"
-        "Команды: /new /sessions /model /cwd /cost /ultra /stop /help",
-        parse_mode="HTML",
-        reply_markup=main_kb(),
-    )
+        L("start_group"), parse_mode="HTML", reply_markup=main_kb())
 
 
 async def cmd_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_owner(update):
         return
-    await update.effective_message.reply_text(
-        "Команды:\n"
-        "/new [имя] — новый топик+сессия\n"
-        "/sessions — список прошлых сессий (с пагинацией)\n"
-        "/import [N] — сразу создать вкладки для N последних сессий\n"
-        "/id — id сессии + команда продолжить на ПК\n"
-        "/mirror — зеркалить работу из VS Code в этот топик\n"
-        "/automirror — авто-зеркало ВСЕХ сессий (создаёт вкладки сам)\n"
-        "/dedup — удалить дубли-вкладки\n"
-        "/voice — провайдер распознавания голоса\n"
-        "/settings — все настройки (тихий режим, подробность)\n"
-        "/thinking — стиль индикатора «думает…»\n"
-        "/verbose — подробность: всё / прогресс без кода / только ответ\n"
-        "/queuemode — как обрабатывать докинутые задачи\n"
-        "/restart — перезапустить бота\n"
-        "/rename <имя> — переименовать этот топик\n"
-        "/model — выбрать модель для этого топика\n"
-        "/cwd <путь> — рабочая папка сессии (по умолч. /root)\n"
-        "/ultra — вкл/выкл режим ultracode\n"
-        "/cost — потрачено токенов в этом топике\n"
-        "/usage — суммарный расход + про лимиты\n"
-        "/footer — подпись со статистикой под ответом вкл/выкл\n"
-        "/stop — прервать текущий запуск\n"
-        "/whoami — твой id и владелец бота"
-    )
+    await update.effective_message.reply_text(L("help_text"))
 
 
 async def cmd_whoami(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1582,27 +1703,28 @@ def settings_kb():
         return ("✅ " if cfg_get(key, default) == "1" else "▫️ ") + label
     verb = VERB_LABELS.get(cfg_get("verbosity", "full"), "?")
     ts = THINK_LABELS.get(cfg_get("think_style", "claude"), "?")
-    qm = "по одной" if cfg_get("queue_mode", "batch") == "each" else "общим"
+    qm = L("queue_each") if cfg_get("queue_mode", "batch") == "each" else L("queue_batch")
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton(f"👁 Подробность: {verb}", callback_data="cyc:verbosity")],
-        [InlineKeyboardButton(f"💭 Индикатор: {ts}", callback_data="cyc:think_style")],
-        [InlineKeyboardButton(f"🔀 Очередь: {qm}", callback_data="cyc:queue_mode")],
-        [InlineKeyboardButton(m("smart_titles", "AI-названия вкладок", "1"),
+        [InlineKeyboardButton(f"{L('set_verbosity')}: {verb}", callback_data="cyc:verbosity")],
+        [InlineKeyboardButton(f"{L('set_indicator')}: {ts}", callback_data="cyc:think_style")],
+        [InlineKeyboardButton(f"{L('set_queue')}: {qm}", callback_data="cyc:queue_mode")],
+        [InlineKeyboardButton(m("smart_titles", L("set_smart_titles"), "1"),
                               callback_data="tog:smart_titles")],
-        [InlineKeyboardButton(m("auto_rename", "Подстраивать имя по ходу"),
+        [InlineKeyboardButton(m("auto_rename", L("set_auto_rename")),
                               callback_data="tog:auto_rename")],
-        [InlineKeyboardButton(m("mirror_activity", "Индикатор «работает» в зеркале", "1"),
+        [InlineKeyboardButton(m("mirror_activity", L("set_mirror_activity"), "1"),
                               callback_data="tog:mirror_activity")],
-        [InlineKeyboardButton(m("custom_emoji", "Наши иконки в ответах", "1"),
+        [InlineKeyboardButton(m("custom_emoji", L("set_custom_emoji"), "1"),
                               callback_data="tog:custom_emoji")],
-        [InlineKeyboardButton(m("auto_compact", "Авто-сжатие контекста (без зависаний)", "1"),
+        [InlineKeyboardButton(m("auto_compact", L("set_auto_compact"), "0"),
                               callback_data="tog:auto_compact")],
-        [InlineKeyboardButton(m("default_ultra", "Новые сессии — сразу ultracode"),
+        [InlineKeyboardButton(m("default_ultra", L("set_default_ultra")),
                               callback_data="tog:default_ultra")],
-        [InlineKeyboardButton(m("notify_queue", "Уведомлять об очереди"),
+        [InlineKeyboardButton(m("notify_queue", L("set_notify_queue")),
                               callback_data="tog:notify_queue")],
-        [InlineKeyboardButton(m("notify_voice", "Показывать расшифровку голоса"),
+        [InlineKeyboardButton(m("notify_voice", L("set_notify_voice")),
                               callback_data="tog:notify_voice")],
+        [InlineKeyboardButton(L("set_language"), callback_data="lang")],
     ])
 
 
@@ -1610,9 +1732,7 @@ async def cmd_settings(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_owner(update):
         return
     await update.effective_message.reply_text(
-        "⚙️ <b>Настройки</b>\nЖми, чтобы переключать. По умолчанию бот работает "
-        "тихо — как Claude, без служебных уведомлений.",
-        parse_mode="HTML", reply_markup=settings_kb())
+        L("settings_title"), parse_mode="HTML", reply_markup=settings_kb())
 
 
 async def cmd_stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1805,6 +1925,17 @@ async def on_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             cfg_set(k, nxt)
         try:
             await q.edit_message_reply_markup(reply_markup=settings_kb())
+        except Exception:
+            pass
+    elif data == "lang":
+        await context.bot.send_message(chat_id, L("lang_pick"),
+                                       message_thread_id=tid, reply_markup=lang_kb())
+    elif data.startswith("setlang:"):
+        lk = data.split(":", 1)[1]
+        if lk in LANGS:
+            cfg_set("lang", lk)
+        try:
+            await q.edit_message_text(L("lang_set"), reply_markup=lang_kb())
         except Exception:
             pass
     elif data.startswith("open:"):
@@ -2401,6 +2532,7 @@ BOT_COMMANDS = [
     ("model",     "🤖 Выбрать модель (Opus/Sonnet/…)"),
     ("settings",  "⚙️ Все настройки бота"),
     ("voice",     "🎙 Распознавание голосовых"),
+    ("lang",      "🌐 Язык интерфейса / Language"),
     ("thinking",  "💭 Стиль индикатора «думает»"),
     ("thinkicon", "✨ Иконка индикатора"),
     ("verbose",   "📃 Подробность ответов (код/прогресс/только ответ)"),
@@ -2508,6 +2640,7 @@ def main():
     app.add_handler(CommandHandler("ctx", cmd_ctx))
     app.add_handler(CommandHandler("compact", cmd_compact))
     app.add_handler(CommandHandler("voice", cmd_voice))
+    app.add_handler(CommandHandler("lang", cmd_lang))
     app.add_handler(CommandHandler("thinking", cmd_thinking))
     app.add_handler(CommandHandler("thinkicon", cmd_thinkicon))
     app.add_handler(CommandHandler("settings", cmd_settings))
