@@ -71,6 +71,26 @@ Telegram (супергруппа с Темами)
 
 ## Пошаговая настройка
 
+### Самый простой способ — через Claude Code (для непрограммистов)
+
+Если на сервере (или ПК) уже установлен **Claude Code** — не нужно вводить команды вручную.
+Откройте Claude Code и **вставьте этот запрос** — он всё сделает сам и проведёт вас по шагам:
+
+```
+Установи и настрой бота Pulse из https://github.com/sotvorcov/pulse-tg-bot на этом сервере.
+Я не программист — объясняй простыми словами и делай по шагам:
+1. Склонируй репозиторий и поставь зависимости (pip install -r requirements.txt).
+2. Спроси у меня токен бота от @BotFather и придуманный секрет владельца, создай .env из .env.example.
+3. Пошагово объясни, как создать в Telegram супергруппу с Темами, добавить бота и выдать ему право «Управление темами».
+4. Настрой автозапуск через systemd, запусти бота и покажи логи.
+5. Скажи, что именно написать боту, чтобы я стал владельцем.
+```
+
+- Claude Code на сервере — **сделает установку сам**. Если он у вас только на ПК — он **продиктует простые команды**, которые нужно выполнить на сервере.
+- От вас нужно только: вставить токен бота, придумать секрет и создать группу в Telegram (Claude подскажет каждый шаг).
+
+Не хотите через Claude Code? Ниже — та же настройка вручную.
+
 ### Шаг 1. Требования
 
 - Сервер или ПК, где **уже установлен и залогинен** [Claude Code](https://claude.com/claude-code) (`claude` в `PATH`).
@@ -271,6 +291,26 @@ The topic↔session mapping, model, working dir and token counters live in `bot.
 ---
 
 ## Step-by-step setup
+
+### Easiest way — via Claude Code (for non-programmers)
+
+If **Claude Code** is already installed on your server (or PC), you don't need to type commands by hand.
+Open Claude Code and **paste this prompt** — it will do everything and walk you through it:
+
+```
+Install and set up the Pulse bot from https://github.com/sotvorcov/pulse-tg-bot on this server.
+I'm not a programmer — explain in plain words and go step by step:
+1. Clone the repo and install dependencies (pip install -r requirements.txt).
+2. Ask me for the bot token from @BotFather and an owner secret, then create .env from .env.example.
+3. Walk me through creating a Telegram supergroup with Topics, adding the bot, and granting it "Manage Topics".
+4. Set up autostart via systemd, launch the bot and show the logs.
+5. Tell me exactly what to send the bot so I become the owner.
+```
+
+- Claude Code on the server will **do the install itself**. If you only have it on your PC, it will **dictate the simple commands** to run on the server.
+- All you provide: the bot token, a secret you choose, and creating the Telegram group (Claude guides every step).
+
+Prefer to do it yourself? The same setup, manually, is below.
 
 ### Step 1. Requirements
 
