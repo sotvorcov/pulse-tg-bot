@@ -478,6 +478,13 @@ compact context automatically as it approaches the threshold.
 <img src="assets/mascot/pulse_mascot_04_fox.png" width="110">
 </div>
 
+## Сообщество / Community
+
+Чат сообщества Pulse — помощь по установке, вопросы, идеи и фишки.
+Pulse community chat — setup help, questions, ideas and tips.
+
+**[Присоединиться · Join →](https://t.me/+7Zv3JfIqloAzNjQy)**
+
 ## Поддержать автора / Support the author
 
 Проект бесплатный и открытый. Если он вам полезен — можно поблагодарить автора (по желанию).

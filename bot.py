@@ -1071,6 +1071,12 @@ STRINGS = {
             "• TON:\n<code>UQD3FL-hS5xziU9AW0qL4WnJ13MGCGxZvyANiO4PZE-RcsXR</code>\n"
             "• Telegram: @naworkal\n\n"
             "Спасибо, что пользуешься Pulse! 💛"),
+        "community_line": "Чат сообщества Pulse: https://t.me/+7Zv3JfIqloAzNjQy",
+        "community_text": (
+            "<b>Сообщество Pulse</b>\n\n"
+            "Помощь по установке, вопросы, идеи и фишки — заходи:\n"
+            "https://t.me/+7Zv3JfIqloAzNjQy\n\n"
+            "Репозиторий: https://github.com/sotvorcov/pulse-tg-bot"),
     },
     "en": {
         "btn_new": "➕ New session",
@@ -1145,6 +1151,12 @@ STRINGS = {
             "• TON:\n<code>UQD3FL-hS5xziU9AW0qL4WnJ13MGCGxZvyANiO4PZE-RcsXR</code>\n"
             "• Telegram: @naworkal\n\n"
             "Thanks for using Pulse! 💛"),
+        "community_line": "Pulse community chat: https://t.me/+7Zv3JfIqloAzNjQy",
+        "community_text": (
+            "<b>Pulse Community</b>\n\n"
+            "Setup help, questions, ideas and tips — join:\n"
+            "https://t.me/+7Zv3JfIqloAzNjQy\n\n"
+            "Repo: https://github.com/sotvorcov/pulse-tg-bot"),
     },
 }
 
@@ -1172,6 +1184,12 @@ async def cmd_donate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_owner(update):
         return
     await update.effective_message.reply_text(L("donate_text"), parse_mode="HTML")
+
+
+async def cmd_community(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_owner(update):
+        return
+    await update.effective_message.reply_text(L("community_text"), parse_mode="HTML")
 
 
 def main_kb():
@@ -1214,13 +1232,15 @@ async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.effective_message.reply_text(L("start_private"), parse_mode="HTML")
         return
     await update.effective_message.reply_text(
-        L("start_group"), parse_mode="HTML", reply_markup=main_kb())
+        L("start_group") + "\n\n" + L("community_line"),
+        parse_mode="HTML", reply_markup=main_kb())
 
 
 async def cmd_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_owner(update):
         return
-    await update.effective_message.reply_text(L("help_text"))
+    await update.effective_message.reply_text(
+        L("help_text") + "\n\n" + L("community_line"))
 
 
 async def cmd_whoami(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -2558,6 +2578,7 @@ BOT_COMMANDS = [
     ("voice",     "🎙 Распознавание голосовых"),
     ("lang",      "🌐 Язык интерфейса / Language"),
     ("donate",    "🙏 Поддержать автора / Support"),
+    ("community", "💬 Чат сообщества / Community"),
     ("thinking",  "💭 Стиль индикатора «думает»"),
     ("thinkicon", "✨ Иконка индикатора"),
     ("verbose",   "📃 Подробность ответов (код/прогресс/только ответ)"),
@@ -2667,6 +2688,7 @@ def main():
     app.add_handler(CommandHandler("voice", cmd_voice))
     app.add_handler(CommandHandler("lang", cmd_lang))
     app.add_handler(CommandHandler("donate", cmd_donate))
+    app.add_handler(CommandHandler("community", cmd_community))
     app.add_handler(CommandHandler("thinking", cmd_thinking))
     app.add_handler(CommandHandler("thinkicon", cmd_thinkicon))
     app.add_handler(CommandHandler("settings", cmd_settings))
