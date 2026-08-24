@@ -1065,7 +1065,8 @@ STRINGS = {
         "donate_text": (
             "🙏 <b>Поддержать автора</b>\n\n"
             "Pulse — бесплатный и открытый. Если он полезен, можно поблагодарить "
-            "(по желанию, адреса тап-копи):\n\n"
+            "(по желанию):\n\n"
+            "• <a href=\"https://t.me/tribute/app?startapp=g61K\">Донат через Tribute</a> (карта / Telegram)\n"
             "• USDT (TRC-20):\n<code>TCq4uGpFcKCJU4fFAZbYzDfLCwG1yAPhN7</code>\n"
             "• TON:\n<code>UQD3FL-hS5xziU9AW0qL4WnJ13MGCGxZvyANiO4PZE-RcsXR</code>\n"
             "• Telegram: @naworkal\n\n"
@@ -1138,7 +1139,8 @@ STRINGS = {
         "donate_text": (
             "🙏 <b>Support the author</b>\n\n"
             "Pulse is free and open-source. If it's useful, you can say thanks "
-            "(optional, addresses are tap-to-copy):\n\n"
+            "(optional):\n\n"
+            "• <a href=\"https://t.me/tribute/app?startapp=g61K\">Donate via Tribute</a> (card / Telegram)\n"
             "• USDT (TRC-20):\n<code>TCq4uGpFcKCJU4fFAZbYzDfLCwG1yAPhN7</code>\n"
             "• TON:\n<code>UQD3FL-hS5xziU9AW0qL4WnJ13MGCGxZvyANiO4PZE-RcsXR</code>\n"
             "• Telegram: @naworkal\n\n"

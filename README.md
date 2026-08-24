@@ -483,9 +483,10 @@ compact context automatically as it approaches the threshold.
 Проект бесплатный и открытый. Если он вам полезен — можно поблагодарить автора (по желанию).
 This project is free and open-source. If you find it useful, you can support the author (optional).
 
+- **Tribute (карта / card):** [Поддержать · Donate](https://t.me/tribute/app?startapp=g61K)
 - **USDT (TRC-20):** `TCq4uGpFcKCJU4fFAZbYzDfLCwG1yAPhN7`
 - **TON:** `UQD3FL-hS5xziU9AW0qL4WnJ13MGCGxZvyANiO4PZE-RcsXR`
-- **Telegram / Tribute:** [@naworkal](https://t.me/naworkal)
+- **Telegram:** [@naworkal](https://t.me/naworkal)
 
 Спасибо! · Thank you!
 
