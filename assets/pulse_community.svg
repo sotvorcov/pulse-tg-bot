@@ -1,0 +1,40 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="72%">
+      <stop offset="0%" stop-color="#141b24"/>
+      <stop offset="55%" stop-color="#0b0f14"/>
+      <stop offset="100%" stop-color="#04060a"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBE08A"/>
+      <stop offset="45%" stop-color="#F0C24B"/>
+      <stop offset="100%" stop-color="#C9922E"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F0C24B" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#F0C24B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="150" fill="url(#centerGlow)"/>
+
+  <!-- внешнее тонкое кольцо -->
+  <circle cx="256" cy="256" r="196" fill="none" stroke="url(#gold)" stroke-width="3" opacity="0.35"/>
+  <!-- основное HUD-кольцо -->
+  <circle cx="256" cy="256" r="176" fill="none" stroke="url(#gold)" stroke-width="10"/>
+
+  <!-- пульс-волна (ЭКГ) — подпись бренда -->
+  <polyline points="112,256 168,256 196,256 214,204 236,318 258,150 280,300 300,232 320,256 400,256"
+            fill="none" stroke="url(#gold)" stroke-width="13"
+            stroke-linejoin="round" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- узел на пике -->
+  <circle cx="258" cy="150" r="9" fill="#FBE08A" filter="url(#glow)"/>
+</svg>
